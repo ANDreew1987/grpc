@@ -42,6 +42,10 @@ option(gRPC_BUILD_CODEGEN "Build codegen" ON)
 option(gRPC_BUILD_CSHARP_EXT "Build C# extensions" ON)
 option(gRPC_BACKWARDS_COMPATIBILITY_MODE "Build libraries that are binary compatible across a larger number of OS and libc versions" OFF)
 
+set(gRPC_DEBUG_POSTFIX "d"
+  CACHE STRING "Default debug postfix")
+mark_as_advanced(gRPC_DEBUG_POSTFIX)
+
 set(gRPC_INSTALL_default ON)
 if (NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   # Disable gRPC_INSTALL by default if building as a submodule
@@ -774,11 +778,12 @@ add_library(address_sorting
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(address_sorting PROPERTIES COMPILE_PDB_NAME "address_sorting"
+  set_target_properties(address_sorting PROPERTIES COMPILE_PDB_NAME "address_sorting" COMPILE_PDB_NAME_DEBUG "address_sorting${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/address_sorting.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/address_sorting$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -829,11 +834,12 @@ add_library(alts_test_util
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(alts_test_util PROPERTIES COMPILE_PDB_NAME "alts_test_util"
+  set_target_properties(alts_test_util PROPERTIES COMPILE_PDB_NAME "alts_test_util" COMPILE_PDB_NAME_DEBUG "alts_test_util${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/alts_test_util.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/alts_test_util$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -914,11 +920,12 @@ add_library(gpr
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(gpr PROPERTIES COMPILE_PDB_NAME "gpr"
+  set_target_properties(gpr PROPERTIES COMPILE_PDB_NAME "gpr" COMPILE_PDB_NAME_DEBUG "gpr${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gpr.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gpr$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -1379,11 +1386,12 @@ add_library(grpc
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc PROPERTIES COMPILE_PDB_NAME "grpc"
+  set_target_properties(grpc PROPERTIES COMPILE_PDB_NAME "grpc" COMPILE_PDB_NAME_DEBUG "grpc${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -1786,11 +1794,12 @@ add_library(grpc_cronet
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc_cronet PROPERTIES COMPILE_PDB_NAME "grpc_cronet"
+  set_target_properties(grpc_cronet PROPERTIES COMPILE_PDB_NAME "grpc_cronet" COMPILE_PDB_NAME_DEBUG "grpc_cronet${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_cronet.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_cronet$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -2130,11 +2139,12 @@ add_library(grpc_test_util
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc_test_util PROPERTIES COMPILE_PDB_NAME "grpc_test_util"
+  set_target_properties(grpc_test_util PROPERTIES COMPILE_PDB_NAME "grpc_test_util" COMPILE_PDB_NAME_DEBUG "grpc_test_util${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_test_util.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_test_util$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -2471,11 +2481,12 @@ add_library(grpc_test_util_unsecure
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc_test_util_unsecure PROPERTIES COMPILE_PDB_NAME "grpc_test_util_unsecure"
+  set_target_properties(grpc_test_util_unsecure PROPERTIES COMPILE_PDB_NAME "grpc_test_util_unsecure" COMPILE_PDB_NAME_DEBUG "grpc_test_util_unsecure${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_test_util_unsecure.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_test_util_unsecure$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -2861,11 +2872,12 @@ add_library(grpc_unsecure
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc_unsecure PROPERTIES COMPILE_PDB_NAME "grpc_unsecure"
+  set_target_properties(grpc_unsecure PROPERTIES COMPILE_PDB_NAME "grpc_unsecure" COMPILE_PDB_NAME_DEBUG "grpc_unsecure${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_unsecure.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_unsecure$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -2965,11 +2977,12 @@ add_library(reconnect_server
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(reconnect_server PROPERTIES COMPILE_PDB_NAME "reconnect_server"
+  set_target_properties(reconnect_server PROPERTIES COMPILE_PDB_NAME "reconnect_server" COMPILE_PDB_NAME_DEBUG "reconnect_server${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/reconnect_server.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/reconnect_server$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3014,11 +3027,12 @@ add_library(test_tcp_server
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(test_tcp_server PROPERTIES COMPILE_PDB_NAME "test_tcp_server"
+  set_target_properties(test_tcp_server PROPERTIES COMPILE_PDB_NAME "test_tcp_server" COMPILE_PDB_NAME_DEBUG "test_tcp_server${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/test_tcp_server.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/test_tcp_server$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3068,11 +3082,12 @@ add_library(bm_callback_test_service_impl
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(bm_callback_test_service_impl PROPERTIES COMPILE_PDB_NAME "bm_callback_test_service_impl"
+  set_target_properties(bm_callback_test_service_impl PROPERTIES COMPILE_PDB_NAME "bm_callback_test_service_impl" COMPILE_PDB_NAME_DEBUG "bm_callback_test_service_impl${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bm_callback_test_service_impl.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bm_callback_test_service_impl$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3126,11 +3141,12 @@ add_library(dns_test_util
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(dns_test_util PROPERTIES COMPILE_PDB_NAME "dns_test_util"
+  set_target_properties(dns_test_util PROPERTIES COMPILE_PDB_NAME "dns_test_util" COMPILE_PDB_NAME_DEBUG "dns_test_util${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/dns_test_util.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/dns_test_util$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3221,11 +3237,12 @@ add_library(grpc++
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++ PROPERTIES COMPILE_PDB_NAME "grpc++"
+  set_target_properties(grpc++ PROPERTIES COMPILE_PDB_NAME "grpc++" COMPILE_PDB_NAME_DEBUG "grpc++${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3547,11 +3564,12 @@ add_library(grpc++_core_stats
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++_core_stats PROPERTIES COMPILE_PDB_NAME "grpc++_core_stats"
+  set_target_properties(grpc++_core_stats PROPERTIES COMPILE_PDB_NAME "grpc++_core_stats" COMPILE_PDB_NAME_DEBUG "grpc++_core_stats${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_core_stats.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_core_stats$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3602,11 +3620,12 @@ add_library(grpc++_error_details
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++_error_details PROPERTIES COMPILE_PDB_NAME "grpc++_error_details"
+  set_target_properties(grpc++_error_details PROPERTIES COMPILE_PDB_NAME "grpc++_error_details" COMPILE_PDB_NAME_DEBUG "grpc++_error_details${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_error_details.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_error_details$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3675,11 +3694,12 @@ add_library(grpc++_proto_reflection_desc_db
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++_proto_reflection_desc_db PROPERTIES COMPILE_PDB_NAME "grpc++_proto_reflection_desc_db"
+  set_target_properties(grpc++_proto_reflection_desc_db PROPERTIES COMPILE_PDB_NAME "grpc++_proto_reflection_desc_db" COMPILE_PDB_NAME_DEBUG "grpc++_proto_reflection_desc_db${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_proto_reflection_desc_db.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_proto_reflection_desc_db$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3742,11 +3762,12 @@ add_library(grpc++_reflection
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++_reflection PROPERTIES COMPILE_PDB_NAME "grpc++_reflection"
+  set_target_properties(grpc++_reflection PROPERTIES COMPILE_PDB_NAME "grpc++_reflection" COMPILE_PDB_NAME_DEBUG "grpc++_reflection${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_reflection.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_reflection$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3810,11 +3831,12 @@ add_library(grpc++_test_config
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++_test_config PROPERTIES COMPILE_PDB_NAME "grpc++_test_config"
+  set_target_properties(grpc++_test_config PROPERTIES COMPILE_PDB_NAME "grpc++_test_config" COMPILE_PDB_NAME_DEBUG "grpc++_test_config${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_test_config.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_test_config$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -3890,11 +3912,12 @@ add_library(grpc++_test_util
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++_test_util PROPERTIES COMPILE_PDB_NAME "grpc++_test_util"
+  set_target_properties(grpc++_test_util PROPERTIES COMPILE_PDB_NAME "grpc++_test_util" COMPILE_PDB_NAME_DEBUG "grpc++_test_util${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_test_util.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_test_util$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -4103,11 +4126,12 @@ add_library(grpc++_test_util_unsecure
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++_test_util_unsecure PROPERTIES COMPILE_PDB_NAME "grpc++_test_util_unsecure"
+  set_target_properties(grpc++_test_util_unsecure PROPERTIES COMPILE_PDB_NAME "grpc++_test_util_unsecure" COMPILE_PDB_NAME_DEBUG "grpc++_test_util_unsecure${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_test_util_unsecure.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_test_util_unsecure$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -4330,11 +4354,12 @@ add_library(grpc++_unsecure
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc++_unsecure PROPERTIES COMPILE_PDB_NAME "grpc++_unsecure"
+  set_target_properties(grpc++_unsecure PROPERTIES COMPILE_PDB_NAME "grpc++_unsecure" COMPILE_PDB_NAME_DEBUG "grpc++_unsecure${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_unsecure.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc++_unsecure$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -4644,11 +4669,12 @@ add_library(grpc_benchmark
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc_benchmark PROPERTIES COMPILE_PDB_NAME "grpc_benchmark"
+  set_target_properties(grpc_benchmark PROPERTIES COMPILE_PDB_NAME "grpc_benchmark" COMPILE_PDB_NAME_DEBUG "grpc_benchmark${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_benchmark.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_benchmark$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -4703,11 +4729,12 @@ add_library(grpc_cli_libs
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc_cli_libs PROPERTIES COMPILE_PDB_NAME "grpc_cli_libs"
+  set_target_properties(grpc_cli_libs PROPERTIES COMPILE_PDB_NAME "grpc_cli_libs" COMPILE_PDB_NAME_DEBUG "grpc_cli_libs${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_cli_libs.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_cli_libs$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -4771,11 +4798,12 @@ add_library(grpc_plugin_support
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc_plugin_support PROPERTIES COMPILE_PDB_NAME "grpc_plugin_support"
+  set_target_properties(grpc_plugin_support PROPERTIES COMPILE_PDB_NAME "grpc_plugin_support" COMPILE_PDB_NAME_DEBUG "grpc_plugin_support${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_plugin_support.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_plugin_support$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -4836,11 +4864,12 @@ add_library(grpcpp_channelz
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpcpp_channelz PROPERTIES COMPILE_PDB_NAME "grpcpp_channelz"
+  set_target_properties(grpcpp_channelz PROPERTIES COMPILE_PDB_NAME "grpcpp_channelz" COMPILE_PDB_NAME_DEBUG "grpcpp_channelz${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpcpp_channelz.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpcpp_channelz$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -4916,11 +4945,12 @@ add_library(http2_client_main
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(http2_client_main PROPERTIES COMPILE_PDB_NAME "http2_client_main"
+  set_target_properties(http2_client_main PROPERTIES COMPILE_PDB_NAME "http2_client_main" COMPILE_PDB_NAME_DEBUG "http2_client_main${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/http2_client_main.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/http2_client_main$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -4982,11 +5012,12 @@ add_library(interop_client_helper
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(interop_client_helper PROPERTIES COMPILE_PDB_NAME "interop_client_helper"
+  set_target_properties(interop_client_helper PROPERTIES COMPILE_PDB_NAME "interop_client_helper" COMPILE_PDB_NAME_DEBUG "interop_client_helper${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_client_helper.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_client_helper$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5051,11 +5082,12 @@ add_library(interop_client_main
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(interop_client_main PROPERTIES COMPILE_PDB_NAME "interop_client_main"
+  set_target_properties(interop_client_main PROPERTIES COMPILE_PDB_NAME "interop_client_main" COMPILE_PDB_NAME_DEBUG "interop_client_main${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_client_main.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_client_main$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5114,11 +5146,12 @@ add_library(interop_server_helper
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(interop_server_helper PROPERTIES COMPILE_PDB_NAME "interop_server_helper"
+  set_target_properties(interop_server_helper PROPERTIES COMPILE_PDB_NAME "interop_server_helper" COMPILE_PDB_NAME_DEBUG "interop_server_helper${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_server_helper.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_server_helper$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5178,11 +5211,12 @@ add_library(interop_server_lib
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(interop_server_lib PROPERTIES COMPILE_PDB_NAME "interop_server_lib"
+  set_target_properties(interop_server_lib PROPERTIES COMPILE_PDB_NAME "interop_server_lib" COMPILE_PDB_NAME_DEBUG "interop_server_lib${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_server_lib.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_server_lib$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5241,11 +5275,12 @@ add_library(interop_server_main
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(interop_server_main PROPERTIES COMPILE_PDB_NAME "interop_server_main"
+  set_target_properties(interop_server_main PROPERTIES COMPILE_PDB_NAME "interop_server_main" COMPILE_PDB_NAME_DEBUG "interop_server_main${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_server_main.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/interop_server_main$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5329,11 +5364,12 @@ add_library(qps
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(qps PROPERTIES COMPILE_PDB_NAME "qps"
+  set_target_properties(qps PROPERTIES COMPILE_PDB_NAME "qps" COMPILE_PDB_NAME_DEBUG "qps${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/qps.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/qps$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5402,11 +5438,12 @@ add_library(grpc_csharp_ext SHARED
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(grpc_csharp_ext PROPERTIES COMPILE_PDB_NAME "grpc_csharp_ext"
+  set_target_properties(grpc_csharp_ext PROPERTIES COMPILE_PDB_NAME "grpc_csharp_ext" COMPILE_PDB_NAME_DEBUG "grpc_csharp_ext${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_csharp_ext.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/grpc_csharp_ext$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5458,11 +5495,12 @@ add_library(bad_client_test
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(bad_client_test PROPERTIES COMPILE_PDB_NAME "bad_client_test"
+  set_target_properties(bad_client_test PROPERTIES COMPILE_PDB_NAME "bad_client_test" COMPILE_PDB_NAME_DEBUG "bad_client_test${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bad_client_test.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bad_client_test$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5507,11 +5545,12 @@ add_library(bad_ssl_test_server
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(bad_ssl_test_server PROPERTIES COMPILE_PDB_NAME "bad_ssl_test_server"
+  set_target_properties(bad_ssl_test_server PROPERTIES COMPILE_PDB_NAME "bad_ssl_test_server" COMPILE_PDB_NAME_DEBUG "bad_ssl_test_server${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bad_ssl_test_server.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bad_ssl_test_server$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5634,11 +5673,12 @@ add_library(end2end_tests
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(end2end_tests PROPERTIES COMPILE_PDB_NAME "end2end_tests"
+  set_target_properties(end2end_tests PROPERTIES COMPILE_PDB_NAME "end2end_tests" COMPILE_PDB_NAME_DEBUG "end2end_tests${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/end2end_tests.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/end2end_tests$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
@@ -5761,11 +5801,12 @@ add_library(end2end_nosec_tests
 )
 
 if(WIN32 AND MSVC)
-  set_target_properties(end2end_nosec_tests PROPERTIES COMPILE_PDB_NAME "end2end_nosec_tests"
+  set_target_properties(end2end_nosec_tests PROPERTIES COMPILE_PDB_NAME "end2end_nosec_tests" COMPILE_PDB_NAME_DEBUG "end2end_nosec_tests${gRPC_DEBUG_POSTFIX}"
     COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEBUG_POSTFIX "${gRPC_DEBUG_POSTFIX}"
   )
   if (gRPC_INSTALL)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/end2end_nosec_tests.pdb
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/end2end_nosec_tests$<$<CONFIG:Debug>:${gRPC_DEBUG_POSTFIX}>.pdb
       DESTINATION ${gRPC_INSTALL_LIBDIR} OPTIONAL
     )
   endif()
